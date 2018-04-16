@@ -46,6 +46,8 @@ class LoginController extends Controller
             $this->username() => 'required|string|exists:users,email',
             'password' => 'required|string',
         ]); // ini untuk validasi input username/email dan password
+
+        // dd($ada);
     }
 
     public function cekRole($email){

@@ -17,5 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'surveyorController@index')->name('home');
 Route::get('/admin-home', 'AdminController@index')->name('admin-home');
+Route::get('/surveyor/home','SurveyorController@index');
