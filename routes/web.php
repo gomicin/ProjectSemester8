@@ -18,5 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'surveyorController@index')->name('home');
-Route::get('/admin-home', 'AdminController@index')->name('admin-home');
 Route::get('/surveyor/home','SurveyorController@index');
+
+Route::Group(['prefix'=>'admin'],function(){
+    Route::get('/home', 'AdminController@index')->name('admin-home');
+    Route::get('/profile','AdminController@profile')->name('admin-profile');
+});
