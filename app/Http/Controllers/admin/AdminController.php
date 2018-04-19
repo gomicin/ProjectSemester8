@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\User;
 use App\user_profile;
 use Auth;
-
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -27,8 +27,14 @@ class AdminController extends Controller
   public function profile(){
     // $admin = new App\User;
      // $admin = user::select('name','role')->where('id','=',Auth::id())->first();
-     $admin = user::profile()->select('fullname','picture')->get();
+     // $admin = User::profile()->select('fullname','picture')->where('user_id',Auth::user()->id)->get();
+     //$admin = User::find(1)->profile()->select('fullname','picture')->first();
+     $admin = User::find(1)->profile()->first();
     // $admin = Auth::id();
-    return view('testerdata.test',compact('admin'));
+     //return view('testerdata.test',['admin'=>$admin]);
+    return view('admin.profile',['admin'=>$admin]);
+  }
+  public function settingprofile(){
+    return "ini setting profile";
   }
 }

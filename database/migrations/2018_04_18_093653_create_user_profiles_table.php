@@ -16,10 +16,11 @@ class CreateUserProfilesTable extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fullname');
-            $table->integer('no_hp')->nullable();
+            $table->string('no_hp')->nullable();
             $table->string('address');
             $table->string('picture')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

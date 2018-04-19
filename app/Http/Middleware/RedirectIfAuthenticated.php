@@ -19,10 +19,10 @@ class RedirectIfAuthenticated
     {
 
         if (Auth::guard('admin')->check()) {
-            return redirect('/admin-home');
+            return redirect()->route('admin-home');
         }
         if(Auth::guard('web')->check()){
-            return redirect('/home');
+            return redirect()->route('home');
         }
         return $next($request);
     }

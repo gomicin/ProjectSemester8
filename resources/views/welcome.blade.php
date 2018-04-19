@@ -69,9 +69,9 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                   @if (Auth::guard('admin')->check())
-                        <a href="{{ url('/admin-home') }}">Home</a>
+                        <a href="{{ route('admin-home') }}">Home</a>
                   @elseif(Auth::guard('web')->check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('home') }}">Home</a>
                   @else
                       <a href="{{ route('login') }}">Login</a>
                   @endif

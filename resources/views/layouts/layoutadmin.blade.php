@@ -35,8 +35,8 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                                <a class="nav-link" href="{{route('admin-profile')}}"><i class="fa fa- user"></i>My Profile</a>
+                                <a class="nav-link" href="{{route('admin-setting')}}"><i class="fa fa -cog"></i>Settings</a>
                                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();">{{ __('Logout') }}
                                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
