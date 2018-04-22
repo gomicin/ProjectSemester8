@@ -38,8 +38,17 @@ Route::Group([
         Route::get('/detail/{id}','AdminSettingSurveyor@show')->name('detail');
         Route::get('/edit/{id}','AdminSettingSurveyor@edit')->name('edit');
         Route::post('/update/{id}','AdminSettingSurveyor@update')->name('update');
-        Route::get('/delete/{id}','AdminSettingSurveyor@destroy')->name('delete');
+        Route::post('/delete/{id}','AdminSettingSurveyor@destroy')->name('delete');
+        Route::post('/reset/{id}','AdminSettingSurveyor@resetpassword')->name('reset-password');
       });
+      Route::Group([
+        'prefix'=>'softdelete',
+    ],function(){
+      Route::get('/surveyor','adminsoftdelete@surveyorsoftdelete')->name('surveyor');
+      Route::post('/retrive/{id}','adminsoftdelete@retrivesurveyor')->name('retrive-surveyor');
+      Route::post('/delete/{id}','adminsoftdelete@deletesurveyor')->name('delete-surveyor');
+    });
+
 
 
     Route::get('/setting','AdminController@settingprofile')->name('admin-setting');

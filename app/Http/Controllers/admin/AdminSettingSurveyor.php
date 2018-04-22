@@ -31,6 +31,7 @@ class AdminSettingSurveyor extends Controller
       return view('admin.surveyor')->with('Dsurveyor',$surveyor);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -118,6 +119,20 @@ class AdminSettingSurveyor extends Controller
           return redirect()->route('view-surveyor')->with('success', 'Update Data Success');
 
     }
+    public function resetpassword($id)
+    {
+        $users = User::where('id', $id)->first();
+        if(!isset($users)){
+          return redirect()->route('view-surveyor')->with('error', 'The id does not exist');
+        }
+
+        $user = User::find($id);
+        $user->update([
+          'password'=>bcrypt('password')
+        ]);
+          return redirect()->route('view-surveyor')->with('success', 'Reset Password Success');
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -127,6 +142,15 @@ class AdminSettingSurveyor extends Controller
      */
     public function destroy($id)
     {
-        return "ini untuk delete surveyor";
+        $users = User::find($id)->first();
+
+        if(!isset($users)){
+          return redirect()->route('view-surveyor')->with('error', 'The id does not exist');
+        }
+
+        $user = User::where('id',$id)->delete();
+        $user_profile = user_profile::where('user_id',$id)->delete();
+
+        return redirect()->route('view-surveyor')->with('success', 'Delete Account Success');
     }
 }

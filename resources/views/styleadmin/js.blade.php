@@ -25,5 +25,8 @@
           $('body').on('click', '.close-flash', function(){
             $(this).parent().css('display', 'none');
           });
+          $('.modal').on('show.bs.modal', function (event) {
+            $(body).css('padding-right', 0);
+          })
         } );
     </script>

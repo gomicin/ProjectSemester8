@@ -22,6 +22,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('picture')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->SoftDeletes();
             $table->timestamps();
         });
     }

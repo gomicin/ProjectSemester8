@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     @include('styleadmin.style')
 
+
 </head>
 <body>
     @include('sidebar.sidebaradmin')
