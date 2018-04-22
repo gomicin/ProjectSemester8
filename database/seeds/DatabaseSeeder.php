@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         array('name'=>'ayod','email'=>'ayod@ce.undip.ac.id','password'=>bcrypt('password'),'role'=>'surveyor'),
       ]);
       DB::table('user_profiles')->insert([
-          array('fullname'=>'admin bidikmisi','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>1),
-          array('fullname'=>'amien kurniawan','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>2),
-          array('fullname'=>'amri lutfi','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>3),
-          array('fullname'=>'ayodya purba','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>4),
+          array('firstname'=>'admin ','lastname'=>'bidikmisi','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>1),
+          array('firstname'=>'amien ','lastname'=>'kurniawan','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>2),
+          array('firstname'=>'amri ','lastname'=>'lutfi','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>3),
+          array('firstname'=>'ayodya ','lastname'=>'purba','no_hp'=>'085727747959','address'=>'jalan prof soedarto','user_id'=>4),
         ]);
       }
     }

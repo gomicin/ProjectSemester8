@@ -36,7 +36,8 @@ Route::Group([
       ],function(){
         Route::get('/view','AdminSettingSurveyor@index')->name('view-surveyor');
         Route::get('/detail/{id}','AdminSettingSurveyor@show')->name('detail');
-        Route::get('/update/{id}','AdminSettingSurveyor@edit')->name('update');
+        Route::get('/edit/{id}','AdminSettingSurveyor@edit')->name('edit');
+        Route::post('/update/{id}','AdminSettingSurveyor@update')->name('update');
         Route::get('/delete/{id}','AdminSettingSurveyor@destroy')->name('delete');
       });
 

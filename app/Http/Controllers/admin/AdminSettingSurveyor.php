@@ -60,7 +60,10 @@ class AdminSettingSurveyor extends Controller
      */
     public function show($id)
     {
-      return  " ini detail";
+      //id yang digunakan adalah id tabel user
+      $surveyor = user_profile::with('user')->where('user_id',$id)->first();
+      //return $surveyor;
+      return view('admin.detailsurveyor')->with('Dsurveyor',$surveyor);
     }
 
     /**
@@ -69,12 +72,13 @@ class AdminSettingSurveyor extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function hallo(){
-       return "hallo";
-     }
+
     public function edit($id)
     {
-        return $id;
+      //id yang digunakan adalah id tabel user
+      $surveyor = user_profile::with('user')->where('user_id',$id)->first();
+      //return $surveyor;
+      return view('admin.updatesurveyor')->with('Dsurveyor',$surveyor);
     }
 
     /**
@@ -86,7 +90,33 @@ class AdminSettingSurveyor extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+          'firstname'=>'required|alpha',
+          'lastname'=>'required|alpha',
+          'no_hp'=>'required|numeric',
+          'email'=>'required|email',
+          'address'=>'required'
+        ]);
+        $users = user_profile::where('user_id', $id)->first();
+        if(!isset($users)){
+          return redirect()->route('view-surveyor')->with('error', 'The id does not exist');
+        }
+
+        $user = User::where('id',$id);
+        $user->update([
+          'email'=>$request->email
+        ]);
+
+        $user_profile = user_profile::where('user_id',$id);
+        $user_profile->update([
+          'firstname'=>$request->firstname,
+          'lastname'=>$request->lastname,
+          'no_hp'=>$request->no_hp,
+          'address'=>$request->address
+        ]);
+
+          return redirect()->route('view-surveyor')->with('success', 'Update Data Success');
+
     }
 
     /**
