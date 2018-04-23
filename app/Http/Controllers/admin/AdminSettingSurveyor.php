@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\user_profile;
-
+use Storage;
+use Validator;
 class AdminSettingSurveyor extends Controller
 {
     public function __construct()
@@ -91,13 +92,26 @@ class AdminSettingSurveyor extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-          'firstname'=>'required|alpha',
-          'lastname'=>'required|alpha',
-          'no_hp'=>'required|numeric',
-          'email'=>'required|email',
-          'address'=>'required'
+      $validator = Validator::make($request->all(), [
+            'firstname'=>'required|alpha',
+            'lastname'=>'required|alpha',
+            'no_hp'=>'required|numeric',
+            'email'=>'required|email',
+            'address'=>'required',
+            'file'=>'required|image|mimes:jpeg,bmp,png'
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        if(User::find($id)->picture){
+          Storage::delete(User::find($id)->picture);
+        }
+
+        $picture = $request->file('file')->store('Filepicture');
+
         $users = user_profile::where('user_id', $id)->first();
         if(!isset($users)){
           return redirect()->route('view-surveyor')->with('error', 'The id does not exist');
@@ -105,7 +119,8 @@ class AdminSettingSurveyor extends Controller
 
         $user = User::where('id',$id);
         $user->update([
-          'email'=>$request->email
+          'email'=>$request->email,
+          'picture'=>$picture
         ]);
 
         $user_profile = user_profile::where('user_id',$id);
@@ -118,7 +133,7 @@ class AdminSettingSurveyor extends Controller
 
           return redirect()->route('view-surveyor')->with('success', 'Update Data Success');
 
-    }
+     }
     public function resetpassword($id)
     {
         $users = User::where('id', $id)->first();
