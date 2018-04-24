@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController extends Controller 
 {
     /*
     |--------------------------------------------------------------------------
